@@ -1,0 +1,31 @@
+name: pyqt5-demo
+base: core20
+version: '0.1'
+summary: Snapping demo of a PyQt5 app
+description: |
+  This is a demo app to demonstrate a PyQt5 snap.
+
+grade: devel # must be 'stable' to release into candidate/stable channels
+confinement: devmode # use 'strict' once you have the right plugs and slots
+
+parts:
+  pyqt5-demo:
+    # See 'snapcraft plugins'
+    plugin: python
+    source: .
+    stage-packages:
+      - python3-pyqt5
+
+apps:
+  pyqt5-demo:
+    #desktop: share/applications/pyqt5-demo.desktop
+    #autostart: pyqt5-demo.desktop
+    extensions:
+      - kde-neon
+    command: bin/pyqt5demo
+    plugs:
+      - home
+      - opengl
+      - network
+    environment:
+      PYTHONPATH: $SNAP/usr/lib/python3/dist-packages
